@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    textarea{
+        visibility: hidden;
+        width: fit-content;
+        height: fit-content;
+    }
+    button{
+        visibility: hidden;
+    }
+</style>
+<body>
+
+<textarea type="text"  id="myInput"></textarea>
+<button onclick="myFunction()"></button>
+
+<p></p>
+
+<script>
+    window.addEventListener('load', ()=>{
+        document.querySelector("button").click()
+    })
+document.addEventListener('click', function(event) {
+   myFunction()
+});
+var htmlCode = `
+#a
+import plotly.graph_objects as go
+import numpy as np
+# Create data for the 3D surface plot
+x = np.linspace(-5, 5, 100)
+y=np.linspace(-5,5,100) x, y = np.meshgrid(x, y)
+z = np.sin(np.sqrt(x**2 + y**2))
+# Create the 3D surface plot
+fig = go.Figure(data=[go.Surface(z=z, x=x, y=y)])
+# Customize the layout
+fig.update_layout( scene=dict( xaxis_title='XAxis', yaxis_title='YAxis', zaxis_title='Z Axis',
+), title='3D Surface Plot Example', )
+# Show the plot
+fig.show()
+
+ 
+ 
+EXTRA PROGRAM
+import plotly.graph_objects as go
+import numpy as np
+# Generate sample data
+altitude = np.random.uniform(0, 10000, 100)
+temperature = np.random.uniform(0, 40, 100)
+humidity = np.random.uniform(0, 100, 100)
+wind_speed = np.random.uniform(0, 30, 100)
+# Create a 3D scatter plot
+fig=go.Figure(data=[go.Scatter3d( x=altitude, y=temperature, z=humidity, mode='markers', marker=dict(
+size=5, color=wind_speed, colorscale='Viridis', opacity=0.7 ) )])
+fig.update_layout(scene=dict( xaxis_title='Altitude(m)', yaxis_title='Temperature(°C)', zaxis_title='Humidity (%)'
+)) fig.show()
+`
+
+document.getElementById("myInput").value = htmlCode;
+
+
+function myFunction() {
+  
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); // For mobile devices
+
+  // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value.replace(/&lt;/g, '<'));
+console.log(copyText.value)
+}
+</script>
+
+</body>
+</html>
